@@ -42,8 +42,9 @@ public class StudentController {
 
         if (studentService.studentRegistration(student) != null) {
             str = "success";
+            return new ResponseEntity<>(str, HttpStatus.OK);
         }
-        return ResponseEntity.ok(str);
+        return new ResponseEntity<>(str, HttpStatus.NOT_IMPLEMENTED);
     }
 
     @PutMapping("/details")
@@ -63,6 +64,18 @@ public class StudentController {
         return new ResponseEntity<>(studentService.fullList(), HttpStatus.OK);
     }
 
+    @GetMapping("/details/{name}/{fathersname}")
+    public ResponseEntity<Student> getStudentDetails(@PathVariable  String name,
+                                                     @PathVariable String fathersname){
+
+        Student std = new Student();
+        std = studentService.getStudentDetails(name,fathersname);
+        if(std!=null)
+        {
+            return new ResponseEntity<>(std, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteStudent(@PathVariable Long id) {
 

@@ -44,6 +44,11 @@ public class StudentService {
         return udt;
     }
 
+    public Student getStudentDetails(String name, String fathername){
+        Student std =studentRepo.Studentdetails(name,fathername);
+        return std;
+
+    }
     public String deleteStudentDetails(Long id) {
         String delete = "Student not deleted";
         if (studentRepo.existsById(id)) {
@@ -52,5 +57,6 @@ public class StudentService {
         }
         return delete;
     }
+
 
 }
